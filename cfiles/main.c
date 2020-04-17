@@ -32,8 +32,6 @@ char* defaultFormatString = "$BROWSER %s";
 char* linkString = "https://www.youtube.com/watch?v=%s";
 
 
-void cleanExit(int exitCode);
-void drawDesc();
 int main (int argc, char *argv[]) {
 
 
@@ -110,6 +108,7 @@ void intArgs (int len, char* argList[]) {
 				break;
 			case 'o':
 				formatString = optarg;
+				break;
 			case 'd':
 				linkString = "%s";
 				break;
