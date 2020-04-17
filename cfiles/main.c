@@ -28,7 +28,8 @@ bool pop = false;
 char* nextPage;
 char* formatString;
 char* searchString;
-char* defaultFormatString = "echo %s";
+char* defaultFormatString = "$BROWSER %s";
+char* linkString = "https://www.youtube.com/watch?v=%s";
 
 
 void cleanExit(int exitCode);
@@ -91,11 +92,11 @@ void drawDesc()
 //Inteprets the arguments
 void intArgs (int len, char* argList[]) {
 	char c;
-	while ((c = getopt (len, argList, "hpl:i:o:")) != -1)
+	while ((c = getopt (len, argList, "hpdl:i:o:")) != -1)
 		switch (c)
 			{
 			case 'h':
-				printf("HElp");
+				system("cat /etc/yttui/help");
 				exit(1);
 				break;
 			case 'l':
@@ -109,6 +110,8 @@ void intArgs (int len, char* argList[]) {
 				break;
 			case 'o':
 				formatString = optarg;
+			case 'd':
+				linkString = "%s";
 				break;
 			default:
 				abort ();
@@ -141,9 +144,13 @@ void moveVert (int n, int max) {
 void openVideo (char* id) {
 
 	char runStr[300];
-	sprintf (runStr, formatString, id);
+	char linkStr[100];
+
+	sprintf (linkStr, linkString, id);
+	sprintf (runStr, formatString, linkStr);
 	system(runStr);
 	drawBuffer(&buffer);
+
 }
 
 
