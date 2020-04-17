@@ -56,8 +56,6 @@ func videoMostPopular (service *youtube.Service, max int64, buffer *[]video) (er
 	idList := constructIdListVid (response.Items)
 	err = saveVideoStatistics (service, idList, buffer)
 
-	log.Printf("\n\n results: %v \n\n", response)
-
 	return err, response.NextPageToken
 }
 /* search results */

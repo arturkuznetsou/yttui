@@ -6,7 +6,7 @@ import (
         "google.golang.org/api/youtube/v3"
 )
 
-const developerKey = "<++>"
+var developerKey = ""
 const videoPerRetrieval = 50
 
 // allowed strings: moderate, none, strict
@@ -20,6 +20,8 @@ var videoBuffer []video
 
 var service *youtube.Service
 var err error
+
+var confFile = ""
 
 
 
@@ -153,7 +155,7 @@ func __init__() {
 
 	setLogToFile()
 
-
+	developerKey, err = getKeyFromFile()
 	service, err = getServiceWithoutLogin()
 
 	handleError(err, "")

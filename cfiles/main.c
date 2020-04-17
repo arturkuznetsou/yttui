@@ -16,6 +16,7 @@ WINDOW *scrn;
 char keyUp = 'k',
      keyDown = 'j',
      keySearch = 'o',
+     keyDesc = 'd',
      keyEnt = 'l';
 
 int cursorIndex = 0,
@@ -31,6 +32,7 @@ char* defaultFormatString = "echo %s";
 
 
 void cleanExit(int exitCode);
+void drawDesc();
 int main (int argc, char *argv[]) {
 
 
@@ -38,8 +40,8 @@ int main (int argc, char *argv[]) {
 	__init__ ();
 
 	if (pop || !searchString ) { nextPage =  videoMostPopularC (); fillInfo (&buffer); }
+	else { nextPage = videoSearchC (searchString); fillInfo (&buffer);}
 	if (!formatString) { formatString = defaultFormatString; }
-	else { printf(searchString); nextPage = videoSearchC (searchString); fillInfo (&buffer);}
 
 
 
@@ -70,6 +72,8 @@ int main (int argc, char *argv[]) {
 
 		else if (d == keyEnt) { openVideo (buffer.id[cursorIndex]); }
 
+		else if (d == keyDesc) { drawDesc(); }
+
 		move (-1, 0);
 		drawLine (0, NULL);
 		if (strlen (nextPage) != 6) { drawPrompt (nextPage); }
@@ -79,6 +83,10 @@ int main (int argc, char *argv[]) {
 	return 0;
 }
 
+void drawDesc()
+{
+	drawPrompt("");
+}
 
 //Inteprets the arguments
 void intArgs (int len, char* argList[]) {

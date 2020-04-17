@@ -10,7 +10,7 @@ func setLogToFile() {
 	usr, err := user.Current()
 	handleError (err, "Could not retrieve current user.")
 
-	logDest := usr.HomeDir + "/.yttui/log"
+	logDest := usr.HomeDir + "/.config/yttui/log"
 	file, err := os.OpenFile (logDest, os.O_CREATE | os.O_WRONLY | os.O_APPEND, 0666)
 
 	handleError (err, "Error opening log file.")
