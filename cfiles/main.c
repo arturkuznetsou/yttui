@@ -72,10 +72,16 @@ int main (int argc, char *argv[]) {
 		else if (d == keyEnt) { openVideo (buffer.id[cursorIndex]); }
 
 		else if (d == keyDesc) { drawDesc(); }
+		else if (d == 'L')
+		{
+			clearBuffGo();
+			nextPage = videoPageIdC(nextPage);
+			fillInfo (&buffer);
+			drawBuffer (&buffer);
+		}
 
 		move (-1, 0);
 		drawLine (0, NULL);
-		if (strlen (nextPage) != 6) { drawPrompt (nextPage); }
 	}
 
 
