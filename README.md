@@ -10,6 +10,7 @@
  -p: Makes the program look up the most popular uploads. Also does this when no searchterm is specified (When no -i option is specified).<br/>
  -l <lang>: sets the searching language. Uses ISO 639-1 codes. ( http://www.loc.gov/standards/iso639-2/php/code_list.php ) <br/>
  -d: Makes the program replace the %s in the <format> with the ID instead of the link.
- -H + <SHIFT>('H'): Go to the previous page<br/>
- -l + <SHIFT>('L'): Go to the next page<br/>
+ -h + SHIFT: Go to the previous page<br/>
+ -l + SHIFT: Go to the next page<br/>
+ -ESC: exit
  -h: Displays this<br/>
