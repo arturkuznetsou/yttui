@@ -6,7 +6,6 @@
 #include <curses.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <unistd.h>
 #include <ctype.h>
 
@@ -26,32 +25,28 @@ int cursorIndex = 0,
 bool pop = false;
 
 char* nextPage;
+char* prevPage;
 char* formatString;
 char* searchString;
 char* defaultFormatString = "$BROWSER %s";
 char* linkString = "https://www.youtube.com/watch?v=%s";
+
+struct vidBuf buffer;
 
 
 int main (int argc, char *argv[]) {
 
 
 	intArgs (argc, argv);
-	__init__ ();
-
-	if (pop || !searchString ) { nextPage =  videoMostPopularC (); fillInfo (&buffer); }
-	else { nextPage = videoSearchC (searchString); fillInfo (&buffer);}
-	if (!formatString) { formatString = defaultFormatString; }
 
 
 
-	wchar_t d;
+	char d;
 
 
 	scrn = initscr();
 	endwin();
-
 	cbreak();
-
 	clear();
 	refresh();
 	curs_set(0);
@@ -69,9 +64,10 @@ int main (int argc, char *argv[]) {
 
 		else if (d == keyUp) { moveVert (-1, buffer.size); }
 
-		else if (d == keyEnt) { openVideo (buffer.id[cursorIndex]); }
+		else if (d == keyEnt) { openVideo (); }
 
-		else if (d == keyDesc) { drawDesc(); }
+		else if (d == 27) { cleanExit(1); }
+
 		else if (d == 'L')
 		{
 			clearBuffGo();
@@ -93,7 +89,7 @@ void drawDesc()
 	drawPrompt("");
 }
 
-//Inteprets the arguments
+//Interprets the arguments
 void intArgs (int len, char* argList[]) {
 	char c;
 	while ((c = getopt (len, argList, "hpdl:i:o:")) != -1)
@@ -121,7 +117,15 @@ void intArgs (int len, char* argList[]) {
 			default:
 				abort ();
 		}
+	__init__ ();
 
+	if (pop || !searchString ) {
+		nextPage =  videoMostPopularC ();
+		fillInfo (&buffer);
+	}
+	else { nextPage = videoSearchC (searchString); fillInfo (&buffer);}
+	if (!formatString) { formatString = defaultFormatString; }
+	if (buffer.size == 0) { printf ("No results.\n"); cleanExit(-1); }
 }
 
 
@@ -146,8 +150,9 @@ void moveVert (int n, int max) {
 
 }
 
-void openVideo (char* id) {
+void openVideo () {
 
+	char* id = buffer.id[cursorIndex];
 	char runStr[300];
 	char linkStr[100];
 
@@ -158,63 +163,10 @@ void openVideo (char* id) {
 
 }
 
-
-
-
-
-void drawLineSingle (struct vidBuf* buffer, int itemIndex) {
-		char viewString[40];
-		char likeString[40];
-		char dislikeString[40];
-		char dateString[11];
-
-		strncpy (dateString, buffer->date[itemIndex], 10);
-		dateString[10] = '\0';
-
-		sprintf (viewString, " ( o) %d", buffer->views[itemIndex]);
-		sprintf (likeString, ":) %d", buffer->likes[itemIndex]);
-		sprintf (dislikeString, ":( %d", buffer->dislikes[itemIndex]);
-
-
-		drawLine (
-				itemIndex + pady,
-
-
-				viewString, 145,
-				likeString, 165,
-
-
-				dislikeString, 180,
-				dateString, 195,
-
-
-				buffer->title[itemIndex], padx,
-				buffer->channelName[itemIndex], padx +100,
-				NULL);
-		mvaddch(itemIndex + pady, 143, ACS_VLINE);
-}
-
-
-
-void drawBuffer (struct vidBuf* buffer) {
-	clear();
-	int count = 0;
-	while (count < buffer->size && count < LINES - pady) {
-		if (count == cursorIndex) { attron (A_STANDOUT); }
-		drawLineSingle (buffer, count);
-		// Fix double line
-		if (count == cursorIndex) { attroff (A_STANDOUT); }
-
-		++count;
-	}
-	if (buffer->size == 0) { drawPrompt ("No results."); getch(); cleanExit(-1); }
-	move (-1, 0);
-}
-
-
 void cleanExit(int exitCode)
 {
-	exit(exitCode);
+	clearBuffer(&buffer);
 	clear();
 	endwin();
+	exit(exitCode);
 }

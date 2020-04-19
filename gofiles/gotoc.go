@@ -104,15 +104,7 @@ func videoPageIdC (pageId *C.char) *C.char {
 //export videoSearchC
 func videoSearchC (search *C.char) *C.char {
 	searchterm := C.GoString (search)
-	err, nextPage := videoSearch (service, searchterm, videoPerRetrieval, &videoBuffer)
-
-	if err != nil {
-		//The string length of 6 is reserved to non-error returns. (Janky solution, I know)
-		if len(err.Error()) == 6 {
-			return C.CString (" " + err.Error())
-		}
-		return C.CString (err.Error())
-	}
+	_, nextPage := videoSearch (service, searchterm, videoPerRetrieval, &videoBuffer)
 
 	return C.CString(nextPage)
 }
@@ -120,15 +112,7 @@ func videoSearchC (search *C.char) *C.char {
 //export videoMostPopularC
 func videoMostPopularC () *C.char {
 
-	err, nextPage := videoMostPopular (service, videoPerRetrieval, &videoBuffer)
-
-	if err != nil {
-		//The string length of 6 is reserved to non-error returns. (Janky solution, I know)
-		if len(err.Error()) == 6 {
-			return C.CString (" " + err.Error())
-		}
-		return C.CString (err.Error())
-	}
+	_, nextPage := videoMostPopular (service, videoPerRetrieval, &videoBuffer)
 	return C.CString(nextPage)
 }
 
@@ -140,6 +124,7 @@ func clearBuffGo () {
 	log.Printf("Clearing buffer\n")
 	videoBuffer = nil
 }
+//This function prints the buffer to log. It exists solely for debugging purposes
 //export printBuffer
 func printBuffer() {
 	for index, item  := range videoBuffer {
@@ -173,4 +158,3 @@ func setSafeSearchC (str *C.char) {
 func setLangC (str *C.char) {
 	relevanceLanguageVar = C.GoString(str)
 }
-

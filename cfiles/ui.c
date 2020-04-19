@@ -1,10 +1,9 @@
 #include "../gotoc.h"
+#include "main.h"
 #include "video.h"
 #include <string.h>
 #include <curses.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdio.h>
+
 
 int drawLine (int line, ...) {
 	//draw empty line to clear the line at the index
@@ -63,3 +62,51 @@ int drawPrompt (char* string){
 	refresh();
 	move (-1, 0);
 }
+
+void drawLineSingle (struct vidBuf* buffer, int itemIndex) {
+		char viewString[40];
+		char likeString[40];
+		char dislikeString[40];
+		char dateString[11];
+
+		strncpy (dateString, buffer->date[itemIndex], 10);
+		dateString[10] = '\0';
+
+		sprintf (viewString, " ( o) %d", buffer->views[itemIndex]);
+		sprintf (likeString, ":) %d", buffer->likes[itemIndex]);
+		sprintf (dislikeString, ":( %d", buffer->dislikes[itemIndex]);
+
+
+		drawLine (
+				itemIndex + pady,
+
+
+				viewString, 145,
+				likeString, 165,
+
+
+				dislikeString, 180,
+				dateString, 195,
+
+
+				buffer->title[itemIndex], padx,
+				buffer->channelName[itemIndex], padx +100,
+				NULL);
+		mvaddch(itemIndex + pady, 143, ACS_VLINE);
+}
+void drawBuffer (struct vidBuf* buffer) {
+	clear();
+	int count = 0;
+	while (count < buffer->size && count < LINES - pady) {
+		if (count == cursorIndex) { attron (A_STANDOUT); }
+		drawLineSingle (buffer, count);
+		if (count == cursorIndex) { attroff (A_STANDOUT); }
+		++count;
+	}
+	move (-1, 0);
+}
+
+
+
+
+
