@@ -1,3 +1,4 @@
+#include "nav.h"
 #include "ui.h"
 #include "main.h"
 #include "video.h"
@@ -10,13 +11,16 @@
 #include <ctype.h>
 
 
+
 WINDOW *scrn;
 
 char keyUp = 'k',
      keyDown = 'j',
      keySearch = 'o',
      keyDesc = 'd',
-     keyEnt = 'l';
+     keyEnt = 'l',
+     keyNextPage = 'L',
+     keyPrevPage = 'H';
 
 int cursorIndex = 0,
     padx = 3, pady = 1;
@@ -68,12 +72,11 @@ int main (int argc, char *argv[]) {
 
 		else if (d == 27) { cleanExit(1); }
 
-		else if (d == 'L')
-		{
-			clearBuffGo();
-			nextPage = videoPageIdC(nextPage);
-			fillInfo (&buffer);
-			drawBuffer (&buffer);
+		else if (d == keyNextPage){
+			//Go to next page (still have to write the function)
+		}
+		else if (d == keyPrevPage){
+			//Go to previous page (still have to write the function)
 		}
 
 		move (-1, 0);
@@ -129,39 +132,6 @@ void intArgs (int len, char* argList[]) {
 }
 
 
-
-void moveVert (int n, int max) {
-
-	drawLineSingle (&buffer, cursorIndex);
-	if (cursorIndex + n >= max) {
-		cursorIndex = max - 1;
-
-	}
-	else if (cursorIndex + n < 0){
-		cursorIndex = 0;
-
-	}
-	else{
-		cursorIndex += n;
-	}
-	attron (A_STANDOUT);
-	drawLineSingle (&buffer, cursorIndex);
-	attroff (A_STANDOUT);
-
-}
-
-void openVideo () {
-
-	char* id = buffer.id[cursorIndex];
-	char runStr[300];
-	char linkStr[100];
-
-	sprintf (linkStr, linkString, id);
-	sprintf (runStr, formatString, linkStr);
-	system(runStr);
-	drawBuffer(&buffer);
-
-}
 
 void cleanExit(int exitCode)
 {

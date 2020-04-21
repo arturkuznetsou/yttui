@@ -4,6 +4,10 @@
 
 #include "video.h"
 
+char* formatString;
+char* defaultFormatString;
+char* linkString;
+
 int cursorIndex;
 int pady;
 int padx;
