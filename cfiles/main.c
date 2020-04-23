@@ -73,10 +73,10 @@ int main (int argc, char *argv[]) {
 		else if (d == 27) { cleanExit(1); }
 
 		else if (d == keyNextPage){
-			//Go to next page (still have to write the function)
+			page(1);
 		}
 		else if (d == keyPrevPage){
-			//Go to previous page (still have to write the function)
+			page(-1);
 		}
 
 		move (-1, 0);
