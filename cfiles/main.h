@@ -4,6 +4,7 @@
 
 #include "video.h"
 
+
 char* formatString;
 char* defaultFormatString;
 char* linkString;

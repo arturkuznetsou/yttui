@@ -45,7 +45,7 @@ int main (int argc, char *argv[]) {
 
 
 
-	char d;
+	wchar_t d;
 
 
 	scrn = initscr();
@@ -78,6 +78,12 @@ int main (int argc, char *argv[]) {
 		else if (d == keyPrevPage){
 			page(-1);
 		}
+		else if (d == 4){
+			moveVert(10, buffer.size);
+		}
+		else if (d == 21){
+			moveVert(-10, buffer.size);
+		}
 
 		move (-1, 0);
 		drawLine (0, NULL);
@@ -87,10 +93,6 @@ int main (int argc, char *argv[]) {
 	return 0;
 }
 
-void drawDesc()
-{
-	drawPrompt("");
-}
 
 //Interprets the arguments
 void intArgs (int len, char* argList[]) {
