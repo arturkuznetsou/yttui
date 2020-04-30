@@ -2,7 +2,7 @@ all: yttui
 
 CFILES := cfiles/*
 GOFILES := gofiles/gotoc.go gofiles/constid.go gofiles/errlog.go gofiles/login.go gofiles/settings.go gofiles/video.go
-LINK := -lpthread -lcurses
+LINK := -lpthread -lncursesw
 CC := gcc
 
 

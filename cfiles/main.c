@@ -4,6 +4,7 @@
 #include "video.h"
 #include "../gotoc.h"
 
+#include <locale.h>
 #include <curses.h>
 #include <string.h>
 #include <stdlib.h>
@@ -41,6 +42,7 @@ struct vidBuf buffer;
 int main (int argc, char *argv[]) {
 
 
+	setlocale(LC_ALL, "");
 	intArgs (argc, argv);
 
 
