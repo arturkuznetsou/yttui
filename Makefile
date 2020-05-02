@@ -1,7 +1,7 @@
 all: yttui
 
 CFILES := cfiles/*
-GOFILES := gofiles/gotoc.go gofiles/constid.go gofiles/errlog.go gofiles/login.go gofiles/settings.go gofiles/video.go
+GOFILES := gofiles/gotoc.go gofiles/constid.go gofiles/errlog.go gofiles/login.go gofiles/settings.go gofiles/video.go  gofiles/config.go
 LINK := -lpthread -lncursesw
 CC := gcc
 

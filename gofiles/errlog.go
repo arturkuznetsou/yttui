@@ -4,6 +4,8 @@ import (
 	"log"
 	"os/user"
 	"os"
+
+	"fmt"
 )
 
 func setLogToFile() {
@@ -19,6 +21,7 @@ func setLogToFile() {
 func handleError(err error, msg string) {
 	if (err != nil) {
 		log.Println(err.Error() + msg)
+		fmt.Printf(err.Error() + msg)
 	}
 }
 

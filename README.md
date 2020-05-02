@@ -4,8 +4,8 @@
  h + SHIFT: Go to the previous page.<br/>
  l + SHIFT: Go to the next page.<br/>
  l: Open the current highlighted video.<br/>
- CTRL + D: Go down ten lines.<br/>
- CTRL + U: Go up ten lines.<br/>
+ CTRL + d: Go down ten lines.<br/>
+ CTRL + u: Go up ten lines.<br/>
  ESC: exit.<br/>
  <br/>
 <br/>

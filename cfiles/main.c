@@ -24,7 +24,7 @@ char keyUp = 'k',
      keyPrevPage = 'H';
 
 int cursorIndex = 0,
-    padx = 3, pady = 1;
+    padx = 10, pady = 3;
 
 
 bool pop = false;
@@ -132,7 +132,7 @@ void intArgs (int len, char* argList[]) {
 	}
 	else { nextPage = videoSearchC (searchString); fillInfo (&buffer);}
 	if (!formatString) { formatString = defaultFormatString; }
-	if (buffer.size == 0) { printf ("No results.\n"); cleanExit(-1); }
+	if (buffer.size == 0) { printf ("\nNo results.\n"); cleanExit(-1); }
 }
 
 

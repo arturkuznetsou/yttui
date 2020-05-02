@@ -23,6 +23,9 @@ var err error
 
 var confFile = ""
 
+var pady = 0;
+var padx = 0;
+
 
 
 func main() {}
@@ -140,7 +143,7 @@ func __init__() {
 
 	setLogToFile()
 
-	developerKey, err = getKeyFromFile()
+	conf()
 	service, err = getServiceWithoutLogin()
 
 	handleError(err, "")
