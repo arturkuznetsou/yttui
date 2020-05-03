@@ -161,3 +161,14 @@ func setSafeSearchC (str *C.char) {
 func setLangC (str *C.char) {
 	relevanceLanguageVar = C.GoString(str)
 }
+
+
+//export getPadXC
+func getPadXC() int {
+	return padx;
+}
+
+//export getPadYC
+func getPadYC() int {
+	return padx;
+}

@@ -10,6 +10,8 @@ import (
 	"regexp"
 
 	"io/ioutil"
+
+	"strconv"
 )
 
 var confBytes []byte;
@@ -29,15 +31,11 @@ func conf(){
 	if err != nil { return; }
 	confBytes = confB
 
-	re := regexp.MustCompile("key:\t.+")
-	keyLine := re.Find(confBytes)
-	re = regexp.MustCompile("\t.+")
-	key := string(re.Find(keyLine))
-	if len(key) < 40 {
-		log.Println("Error: Invalid API key.")
-	}
-	developerKey =  key[1:40]
-	log.Println("found" + findOpt("pady"));
+	developerKey = findOpt("key")
+	opt := findOpt("pady")
+	if(opt != ""){ pady, err = strconv.Atoi(opt); }
+	opt = findOpt("padx")
+	if(opt != ""){ padx, err = strconv.Atoi(opt); }
 }
 
 func findOpt(opt string) (string) {
@@ -45,5 +43,8 @@ func findOpt(opt string) (string) {
 	keyLine := re.Find(confBytes)
 	re = regexp.MustCompile("\t.+")
 	str := string(re.Find(keyLine))
-	return string(str)
+	if(str != ""){
+		return string(str)[1:]
+	}
+	return ""
 }

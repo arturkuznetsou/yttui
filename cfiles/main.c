@@ -24,7 +24,7 @@ char keyUp = 'k',
      keyPrevPage = 'H';
 
 int cursorIndex = 0,
-    padx = 10, pady = 3;
+    padx, pady;
 
 
 bool pop = false;
@@ -96,7 +96,7 @@ int main (int argc, char *argv[]) {
 }
 
 
-//Interprets the arguments
+//Interprets the arguments and sets up some other things
 void intArgs (int len, char* argList[]) {
 	char c;
 	while ((c = getopt (len, argList, "hpdl:i:o:")) != -1)
@@ -133,6 +133,8 @@ void intArgs (int len, char* argList[]) {
 	else { nextPage = videoSearchC (searchString); fillInfo (&buffer);}
 	if (!formatString) { formatString = defaultFormatString; }
 	if (buffer.size == 0) { printf ("\nNo results.\n"); cleanExit(-1); }
+	pady  = getPadYC();
+	padx  = getPadXC();
 }
 
 
