@@ -1,5 +1,6 @@
 #include "../gotoc.h"
 #include "main.h"
+#include "ui.h"
 #include "video.h"
 #include <string.h>
 #include <curses.h>
@@ -47,7 +48,7 @@ int drawLine (int line, ...) {
 	return line + 1;
 }
 
-int drawPrompt (char* string){
+void drawPrompt (char* string){
 
 	attron (A_STANDOUT);
 	drawLine ((int)(LINES/2 - 2), NULL);
