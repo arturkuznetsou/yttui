@@ -143,7 +143,6 @@ func __init__() {
 
 	setLogToFile()
 
-	conf()
 	service, err = getServiceWithoutLogin()
 
 	handleError(err, "")
@@ -161,14 +160,7 @@ func setSafeSearchC (str *C.char) {
 func setLangC (str *C.char) {
 	relevanceLanguageVar = C.GoString(str)
 }
-
-
-//export getPadXC
-func getPadXC() int {
-	return padx;
-}
-
-//export getPadYC
-func getPadYC() int {
-	return padx;
+//export setKeyC
+func setKeyC (str *C.char) {
+	developerKey = C.GoString(str)
 }

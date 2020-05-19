@@ -4,6 +4,7 @@
 #include "video.h"
 #include "../gotoc.h"
 
+#include "config.h"
 #include <locale.h>
 #include <curses.h>
 #include <string.h>
@@ -15,14 +16,6 @@
 
 WINDOW *scrn;
 
-char keyUp = 'k',
-     keyDown = 'j',
-     keySearch = 'o',
-     keyDesc = 'd',
-     keyEnt = 'l',
-     keyNextPage = 'L',
-     keyPrevPage = 'H';
-
 int cursorIndex = 0,
     padx, pady;
 
@@ -33,7 +26,7 @@ char* nextPage;
 char* prevPage;
 char* formatString;
 char* searchString;
-char* defaultFormatString = "$BROWSER %s & disown";
+char* defaultFormatString = "firefox %s & disown";
 char* linkString = "https://www.youtube.com/watch?v=%s";
 
 struct vidBuf buffer;
@@ -72,7 +65,7 @@ int main (int argc, char *argv[]) {
 
 		else if (d == keyEnt) { openVideo (); }
 
-		else if (d == 27) { cleanExit(1); }
+		else if (d == escKey) { cleanExit(1); }
 
 		else if (d == keyNextPage){
 			page(1);
@@ -80,10 +73,10 @@ int main (int argc, char *argv[]) {
 		else if (d == keyPrevPage){
 			page(-1);
 		}
-		else if (d == 4){
+		else if (d == keyUpByTen){
 			moveVert(10, buffer.size);
 		}
-		else if (d == 21){
+		else if (d == keyDownByTen){
 			moveVert(-10, buffer.size);
 		}
 
@@ -98,6 +91,7 @@ int main (int argc, char *argv[]) {
 
 //Interprets the arguments and sets up some other things
 void intArgs (int len, char* argList[]) {
+	setKeyC(devKey);
 	char c;
 	while ((c = getopt (len, argList, "hpdl:i:o:")) != -1)
 		switch (c)
@@ -133,8 +127,6 @@ void intArgs (int len, char* argList[]) {
 	else { nextPage = videoSearchC (searchString); fillInfo (&buffer);}
 	if (!formatString) { formatString = defaultFormatString; }
 	if (buffer.size == 0) { printf ("\nNo results.\n"); cleanExit(-1); }
-	pady  = getPadYC();
-	padx  = getPadXC();
 }
 
 
