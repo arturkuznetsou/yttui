@@ -33,7 +33,7 @@ char* nextPage;
 char* prevPage;
 char* formatString;
 char* searchString;
-char* defaultFormatString = "$BROWSER %s";
+char* defaultFormatString = "$BROWSER %s & disown";
 char* linkString = "https://www.youtube.com/watch?v=%s";
 
 struct vidBuf buffer;
@@ -103,7 +103,7 @@ void intArgs (int len, char* argList[]) {
 		switch (c)
 			{
 			case 'h':
-				system("cat /etc/yttui/help");
+				system("cat /usr/local/etc/yttuihelp");
 				exit(1);
 				break;
 			case 'l':
