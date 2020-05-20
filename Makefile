@@ -18,8 +18,9 @@ gotoc.a: $(GOFILES)
 yttui: $(CFILES) gotoc.h gotoc.a
 	$(CC) -o $@ $^ $(LINK)
 
-clean: gotoc.a gotoc.h
-	rm -r $^ _obj
+
+clean: gotoc.a gotoc.h yttui
+	rm -rf _obj gotoc.a gotoc.h
 
 install: yttui
 	mv $^ $(INSTALLDIR)
