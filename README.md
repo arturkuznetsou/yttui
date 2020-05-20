@@ -1,4 +1,8 @@
-# Controls:<br/>
+# Prerequisites:<br/>
+Configuring is done from the config.h. **You will need a YouTube API developer key** to use the program, which is not provided out of the box.<br/>
+<br/>
+<br/>
+# Default controls:<br/>
  j: Go down one line.<br/>
  k: Go up one line.<br/>
  h + SHIFT: Go to the previous page.<br/>
