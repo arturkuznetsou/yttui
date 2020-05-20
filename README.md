@@ -1,5 +1,8 @@
 # Prerequisites:<br/>
 Configuring is done from the config.h. **You will need a YouTube API developer key** to use the program, which is not provided out of the box.<br/>
+You will also need the Go dependencies on your machine. <br>
+     go get -u google.golang.org/api/youtube/v3<br>
+     go get -u golang.org/x/oauth2/...<br>
 <br/>
 <br/>
 # Default controls:<br/>
