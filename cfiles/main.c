@@ -4,7 +4,7 @@
 #include "video.h"
 #include "../gotoc.h"
 
-#include "config.h"
+#include "../config.h"
 #include <locale.h>
 #include <curses.h>
 #include <string.h>
@@ -16,8 +16,7 @@
 
 WINDOW *scrn;
 
-int cursorIndex = 0,
-    padx, pady;
+int cursorIndex = 0;
 
 
 bool pop = false;
@@ -26,7 +25,7 @@ char* nextPage;
 char* prevPage;
 char* formatString;
 char* searchString;
-char* defaultFormatString = "firefox %s & disown";
+char* defaultFormatString = "$BROWSER %s & disown";
 char* linkString = "https://www.youtube.com/watch?v=%s";
 
 struct vidBuf buffer;
