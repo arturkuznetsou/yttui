@@ -5,6 +5,7 @@
 #include "video.h"
 
 
+void help(int code);
 void cleanExit(int exitCode);
 void drawDesc();
 void moveVert (int n, int max);

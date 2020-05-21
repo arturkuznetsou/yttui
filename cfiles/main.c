@@ -92,21 +92,14 @@ int main (int argc, char *argv[]) {
 void intArgs (int len, char* argList[]) {
 	setKeyC(devKey);
 	char c;
-	while ((c = getopt (len, argList, "hpdl:i:o:")) != -1)
-		switch (c)
-			{
+	while ((c = getopt (len, argList, "hdl:o:")) != -1)
+		switch (c) {
 			case 'h':
 				system("cat /usr/local/etc/yttuihelp");
 				exit(1);
 				break;
 			case 'l':
 				setLangC (optarg);
-				break;
-			case 'p':
-				pop = true;
-				break;
-			case 'i':
-				searchString = optarg;
 				break;
 			case 'o':
 				formatString = optarg;
@@ -116,18 +109,26 @@ void intArgs (int len, char* argList[]) {
 				break;
 			default:
 				abort ();
+				break;
 		}
 	__init__ ();
-
-	if (pop || !searchString ) {
+	if (len - optind > 1) {
+		printf("Too many positional arguments. Usage: 'yttui [OPTION...] [SEARCHSTRING]\n");
+		exit(-1);
+	}
+	else if(len - optind == 1)
+	{
+		searchString = argList[optind];
+		nextPage = videoSearchC (searchString);
+		fillInfo (&buffer);
+	}
+	else {
 		nextPage =  videoMostPopularC ();
 		fillInfo (&buffer);
 	}
-	else { nextPage = videoSearchC (searchString); fillInfo (&buffer);}
 	if (!formatString) { formatString = defaultFormatString; }
 	if (buffer.size == 0) { printf ("\nNo results.\n"); cleanExit(-1); }
 }
-
 
 
 void cleanExit(int exitCode)
