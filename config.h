@@ -11,7 +11,7 @@ char keyUp = 'k',
      keyDownByTen = 21,
      // Number 27 = ESC key
      escKey = 27;
-char* devKey = "AIzaSyChxouOhmPo_6GSs-21XYnTxyJZ5YHPJAU";
+char* devKey = "";
 
 /*
  * Margin to the left and top of the screen
