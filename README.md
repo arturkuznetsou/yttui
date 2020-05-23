@@ -20,10 +20,8 @@ You will also need the Go dependencies on your machine. <br/>
 <br/>
 # How to run the program from the command line:<br/>
 Usage:
-```
 
 yttui [OPTION...] [SEARCHSTRING]<br/>
-```
 <br/>
  -o (format): Specifies the command which will be ran when the key 'l' is pressed. %s will be replaced by the video link.<br/>
   IE: '-o "firefox %s"' will result in the video being opened in firefox.<br/>
