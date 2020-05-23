@@ -91,9 +91,10 @@ void drawLineSingle (struct vidBuf* buffer, int itemIndex) {
 
 
 				buffer->title[itemIndex], padx,
-				buffer->channelName[itemIndex], padx +100,
+				buffer->channelName[itemIndex], padx + 100,
 				NULL);
 		mvaddch(itemIndex + pady, 143, ACS_VLINE);
+		mvaddch(itemIndex + pady, padx + 99, ACS_VLINE);
 }
 void drawBuffer (struct vidBuf* buffer) {
 	clear();

@@ -113,7 +113,7 @@ void intArgs (int len, char* argList[]) {
 		}
 	__init__ ();
 	if (len - optind > 1) {
-		printf("Too many positional arguments. Usage: 'yttui [OPTION...] [SEARCHSTRING]\n");
+		printf("Too many positional arguments. Usage: yttui [OPTION...] [SEARCHSTRING]\n");
 		exit(-1);
 	}
 	else if(len - optind == 1)
