@@ -2,12 +2,13 @@
 Configuring is done from the config.h. **You will need a YouTube API developer key** to use the program, which is not provided out of the box.<br/>
 You will also need the Go dependencies on your machine. <br/>
 ```
-     go get -u google.golang.org/api/youtube/v3<br/>
-     go get -u golang.org/x/oauth2/...<br/>
+     go get -u google.golang.org/api/youtube/v3
+     go get -u golang.org/x/oauth2/...
 ```
 <br/>
 <br/>
 # Default controls:<br/>
+**When closing the terminal with yttui running, always first exist yttui. The browser will also be closed otherwise.**
  j: Go down one line.<br/>
  k: Go up one line.<br/>
  h + SHIFT: Go to the previous page.<br/>
