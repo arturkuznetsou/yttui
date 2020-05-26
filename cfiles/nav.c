@@ -37,7 +37,7 @@ void moveVert (int n, int max) {
 void openVideo () {
 
 	char* id = buffer.id[cursorIndex];
-	char runStr[300];
+	char runStr[800];
 	char linkStr[100];
 
 	sprintf (linkStr, linkString, id);

@@ -25,7 +25,7 @@ char* nextPage;
 char* prevPage;
 char* formatString;
 char* searchString;
-char* defaultFormatString = "$BROWSER %s & disown";
+char* defaultFormatString = "$BROWSER %s&disown";
 char* linkString = "https://www.youtube.com/watch?v=%s";
 
 struct vidBuf buffer;
