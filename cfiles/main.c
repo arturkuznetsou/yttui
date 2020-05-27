@@ -24,7 +24,6 @@ bool pop = false;
 char* nextPage;
 char* prevPage;
 char* formatString;
-char* searchString;
 char* defaultFormatString = "$BROWSER %s&disown";
 char* linkString = "https://www.youtube.com/watch?v=%s";
 
@@ -112,20 +111,26 @@ void intArgs (int len, char* argList[]) {
 				break;
 		}
 	__init__ ();
-	if (len - optind > 1) {
-		printf("Too many positional arguments. Usage: yttui [OPTION...] [SEARCHSTRING]\n");
-		exit(-1);
-	}
-	else if(len - optind == 1)
+	int size = 0;
+	for(int i = optind; i < len; i++)
 	{
-		searchString = argList[optind];
-		nextPage = videoSearchC (searchString);
-		fillInfo (&buffer);
+		size += 1;
+		size += strlen(argList[i]);
+	}
+	char string[size + 1];
+	string[0] = '\0';
+	for(int i = optind; i < len; i++)
+	{
+		strcat(string, argList[i]);
+		strcat(string, " ");
+	}
+	if(!size){
+		nextPage =  videoMostPopularC ();
 	}
 	else {
-		nextPage =  videoMostPopularC ();
-		fillInfo (&buffer);
+		nextPage = videoSearchC (string);
 	}
+	fillInfo (&buffer);
 	if (!formatString) { formatString = defaultFormatString; }
 	if (buffer.size == 0) { printf ("\nNo results.\n"); cleanExit(-1); }
 }
