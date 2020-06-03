@@ -17,10 +17,6 @@
 WINDOW *scrn;
 
 int cursorIndex = 0;
-
-
-bool pop = false;
-
 char* nextPage;
 char* prevPage;
 char* formatString;
@@ -32,15 +28,8 @@ struct vidBuf buffer;
 
 int main (int argc, char *argv[]) {
 
-
 	setlocale(LC_ALL, "");
 	intArgs (argc, argv);
-
-
-
-	wchar_t d;
-
-
 	scrn = initscr();
 	endwin();
 	cbreak();
@@ -51,35 +40,42 @@ int main (int argc, char *argv[]) {
 	drawBuffer (&buffer);
 
 
+	wchar_t d;
 	while(1) {
 
 		d = getch();
 
-		if (d == keyDown) { moveVert (1, buffer.size); }
-
-		else if (d == KEY_RESIZE) { drawBuffer (&buffer); }
-
-		else if (d == keyUp) { moveVert (-1, buffer.size); }
-
-		else if (d == keyEnt) { openVideo (); }
-
-		else if (d == escKey) { cleanExit(1); }
-
-		else if (d == keyNextPage){
-			page(1);
+		switch(d) {
+			case keyDown:
+				moveVert (1, buffer.size);
+				break;
+			case KEY_RESIZE :
+				drawBuffer (&buffer);
+				break;
+			case keyUp :
+				moveVert (-1, buffer.size);
+				break;
+			case keyEnt :
+				openVideo ();
+				break;
+			case escKey :
+				cleanExit(1);
+				break;
+			case keyNextPage:
+				page(1);
+				break;
+			case keyPrevPage:
+				page(-1);
+				break;
+			case keyUpByTen:
+				moveVert(10, buffer.size);
+				break;
+			case keyDownByTen:
+				moveVert(-10, buffer.size);
+				break;
 		}
-		else if (d == keyPrevPage){
-			page(-1);
-		}
-		else if (d == keyUpByTen){
-			moveVert(10, buffer.size);
-		}
-		else if (d == keyDownByTen){
-			moveVert(-10, buffer.size);
-		}
 
-		move (-1, 0);
-		drawLine (0, NULL);
+		move (LINES + 1, 0);
 	}
 
 
