@@ -7,7 +7,7 @@ go get -u golang.org/x/oauth2/...
 ```
 <br/>
 <br/>
-Default controls:<br/>
+# Default controls:<br/>
 **When closing the terminal with yttui running, always first exist yttui. The browser will also be closed otherwise.**
  j: Go down one line.<br/>
  k: Go up one line.<br/>
@@ -19,8 +19,7 @@ Default controls:<br/>
  ESC: exit.<br/>
  <br/>
 <br/>
-How to run the program from the command line:<br/>
-Usage:
+# How to run the program from the command line:
 
 ```
 yttui [OPTIONS...] [SEARCHSTRING]<br/>
