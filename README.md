@@ -7,7 +7,7 @@ You will also need the Go dependencies on your machine. <br/>
 ```
 <br/>
 <br/>
-# Default controls:<br/>
+## Default controls:<br/>
 **When closing the terminal with yttui running, always first exist yttui. The browser will also be closed otherwise.**
  j: Go down one line.<br/>
  k: Go up one line.<br/>
@@ -19,7 +19,7 @@ You will also need the Go dependencies on your machine. <br/>
  ESC: exit.<br/>
  <br/>
 <br/>
-# How to run the program from the command line:<br/>
+### How to run the program from the command line:<br/>
 Usage:
 
 yttui [OPTIONS...] [SEARCHSTRING]<br/>
