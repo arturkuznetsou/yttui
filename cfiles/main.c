@@ -20,7 +20,7 @@ int cursorIndex = 0;
 char* nextPage;
 char* prevPage;
 char* formatString;
-char* defaultFormatString = "setsid -f $BROWSER %s";
+char* defaultFormatString = "setsid -f $BROWSER %s > /dev/null 2";
 char* linkString = "https://www.youtube.com/watch?v=%s";
 
 struct vidBuf buffer;
