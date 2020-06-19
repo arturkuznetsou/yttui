@@ -16,7 +16,7 @@
 #define keyDownByTen 21
 // Number 27 = ESC key
 #define escKey 27
-char* devKey = "";
+char* devKey = "AIzaSyChxouOhmPo_6GSs-21XYnTxyJZ5YHPJAU";
 
 /*
  * Margin to the left and top of the screen
